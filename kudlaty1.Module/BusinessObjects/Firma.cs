@@ -17,6 +17,7 @@ using System.Text.Json.Nodes;
 namespace kudlaty1.Module.BusinessObjects
 {
     [DefaultClassOptions]
+    [XafDefaultProperty(nameof(Nazwa))]
     [NavigationItem("Operacje")]
     public class Firma : BaseObject
     {
