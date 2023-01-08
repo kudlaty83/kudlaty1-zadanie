@@ -113,29 +113,32 @@ namespace kudlaty1.Module.BusinessObjects
                 {
                     adres = new Uri("https://wl-api.mf.gov.pl/api/search/regon/" + Regon.ToString() + "?date=2023-01-08");
                 }
-                var dane_tmp = await klient.GetStringAsync(adres);
-                var dane = JsonObject.Parse(dane_tmp);
-                //this.nazwa=dane["Subject"]["Name"].ToString();
-                if (dane["result"]["subject"]["name"] != null) Nazwa = dane["result"]["subject"]["name"].ToString();
-                else Nazwa = "Brak nazwy";
-                if (dane["result"]["subject"]["regon"] != null) Regon = dane["result"]["subject"]["regon"].ToString();
-                else Regon = "";
-                if (dane["result"]["subject"]["nip"] != null) Nip = dane["result"]["subject"]["nip"].ToString();
-                else Nip = "";
-                if (dane["result"]["subject"]["krs"] != null) Krs = dane["result"]["subject"]["krs"].ToString();
-                else Krs = "";
-                if (dane["result"]["subject"]["residenceAddress"] != null) AdresSiedziby = dane["result"]["subject"]["residenceAddress"].ToString();
-                else AdresSiedziby = "";
-                if (dane["result"]["subject"]["workingAddress"] != null) AdresWykonywaniaDzialalnosci = dane["result"]["subject"]["workingAddress"].ToString();
-                else AdresWykonywaniaDzialalnosci = "";
-                if (dane["result"]["subject"]["registrationLegalDate"] != null) DataRozpoczeciaDzialanosci = DateTime.Parse(dane["result"]["subject"]["registrationLegalDate"].ToString());
-                // Status VAT traktuje inaczej ;)
+                if (Nip != "" || Regon != "")
+                {
+                    var dane_tmp = await klient.GetStringAsync(adres);
+                    var dane = JsonObject.Parse(dane_tmp);
+                    //this.nazwa=dane["Subject"]["Name"].ToString();
+                    if (dane["result"]["subject"]["name"] != null) Nazwa = dane["result"]["subject"]["name"].ToString();
+                    else Nazwa = "Brak nazwy";
+                    if (dane["result"]["subject"]["regon"] != null) Regon = dane["result"]["subject"]["regon"].ToString();
+                    else Regon = "";
+                    if (dane["result"]["subject"]["nip"] != null) Nip = dane["result"]["subject"]["nip"].ToString();
+                    else Nip = "";
+                    if (dane["result"]["subject"]["krs"] != null) Krs = dane["result"]["subject"]["krs"].ToString();
+                    else Krs = "";
+                    if (dane["result"]["subject"]["residenceAddress"] != null) AdresSiedziby = dane["result"]["subject"]["residenceAddress"].ToString();
+                    else AdresSiedziby = "";
+                    if (dane["result"]["subject"]["workingAddress"] != null) AdresWykonywaniaDzialalnosci = dane["result"]["subject"]["workingAddress"].ToString();
+                    else AdresWykonywaniaDzialalnosci = "";
+                    if (dane["result"]["subject"]["registrationLegalDate"] != null) DataRozpoczeciaDzialanosci = DateTime.Parse(dane["result"]["subject"]["registrationLegalDate"].ToString());
+                    // Status VAT traktuje inaczej ;)
 
-                // Czynny, Zwolniony, Niezarejestrowany
-                if (dane["result"]["subject"]["statusVat"].ToString() == "Czynny") StatusVat = StatusVat.Czynny;
-                if (dane["result"]["subject"]["statusVat"].ToString() == "Zwolniony") StatusVat = StatusVat.Zwolniony;
-                if (dane["result"]["subject"]["statusVat"].ToString() == "Niezarejestrowany") StatusVat = StatusVat.Niezarejestrowany;
-
+                    // Czynny, Zwolniony, Niezarejestrowany
+                    if (dane["result"]["subject"]["statusVat"].ToString() == "Czynny") StatusVat = StatusVat.Czynny;
+                    if (dane["result"]["subject"]["statusVat"].ToString() == "Zwolniony") StatusVat = StatusVat.Zwolniony;
+                    if (dane["result"]["subject"]["statusVat"].ToString() == "Niezarejestrowany") StatusVat = StatusVat.Niezarejestrowany;
+                }
+                else Nazwa = "Wypelnij NIP lub REGON";
 
             }
             catch (Exception ex)
