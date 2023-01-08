@@ -38,7 +38,9 @@ namespace kudlaty1.Module.BusinessObjects
         {
             get => nazwa;
             set => SetPropertyValue(nameof(Nazwa), ref nazwa, value);
+
         }
+
 
 
         [Size(15)]
@@ -104,7 +106,13 @@ namespace kudlaty1.Module.BusinessObjects
             var klient = new HttpClient();
             try {
                 if (Nip == null) Nip = "";
-                var adres = new Uri("https://wl-api.mf.gov.pl/api/search/nip/"+Nip.ToString()+"?date=2023-01-08");
+                if (Regon == null) Regon = "";
+                var adres = new Uri("https://wl-api.mf.gov.pl/api/search/nip/" + Nip.ToString() + "?date=2023-01-08");
+                
+                if(Nip=="" & Regon!="")
+                {
+                    adres = new Uri("https://wl-api.mf.gov.pl/api/search/regon/" + Regon.ToString() + "?date=2023-01-08");
+                }
                 var dane_tmp = await klient.GetStringAsync(adres);
                 var dane = JsonObject.Parse(dane_tmp);
                 //this.nazwa=dane["Subject"]["Name"].ToString();
@@ -112,6 +120,8 @@ namespace kudlaty1.Module.BusinessObjects
                 else Nazwa = "Brak nazwy";
                 if (dane["result"]["subject"]["regon"] != null) Regon = dane["result"]["subject"]["regon"].ToString();
                 else Regon = "";
+                if (dane["result"]["subject"]["nip"] != null) Nip = dane["result"]["subject"]["nip"].ToString();
+                else Nip = "";
                 if (dane["result"]["subject"]["krs"] != null) Krs = dane["result"]["subject"]["krs"].ToString();
                 else Krs = "";
                 if (dane["result"]["subject"]["residenceAddress"] != null) AdresSiedziby = dane["result"]["subject"]["residenceAddress"].ToString();
@@ -133,6 +143,7 @@ namespace kudlaty1.Module.BusinessObjects
                 Nazwa = "Bledny NIP";
                 Krs = "";
                 Regon = "";
+                Nip = "";
                 AdresSiedziby = "";
                 AdresWykonywaniaDzialalnosci = "";
                 DataRozpoczeciaDzialanosci = DateTime.Parse("1970-01-01");

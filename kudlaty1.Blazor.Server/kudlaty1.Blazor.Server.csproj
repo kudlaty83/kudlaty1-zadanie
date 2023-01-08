@@ -7,6 +7,7 @@
     <FileVersion>1.0.0.0</FileVersion>
     <Configurations>Debug;Release;EasyTest</Configurations>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>081ad9d5-0f3f-42dc-8dff-03928239dee6</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Model.xafml" />
@@ -23,6 +24,12 @@
     <PackageReference Include="DevExpress.ExpressApp.ReportsV2.Blazor" Version="22.2.3" />
     <PackageReference Include="DevExpress.ExpressApp.Security.Xpo" Version="22.2.3" />
     <PackageReference Include="DevExpress.ExpressApp.Validation.Blazor" Version="22.2.3" />
+    <PackageReference Include="Microsoft.Azure.SignalR" Version="1.4.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\kudlaty1.Module\kudlaty1.Module.csproj" />
