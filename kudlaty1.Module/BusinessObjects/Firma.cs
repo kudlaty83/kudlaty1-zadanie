@@ -132,8 +132,8 @@ namespace kudlaty1.Module.BusinessObjects
                 Regon = odpowiedzMF.result.subject.regon;
                 AdresSiedziby = odpowiedzMF.result.subject.residenceAddress;
                 AdresWykonywaniaDzialalnosci = odpowiedzMF.result.subject.workingAdress;
-
-                if(odpowiedzMF.result.subject.statusVat=="Czynny") StatusVat = StatusVat.Czynny;
+                dataRozpoczeciaDzialanosci = DateTime.Parse(odpowiedzMF.result.subject.registrationLegalDate);
+                if (odpowiedzMF.result.subject.statusVat=="Czynny") StatusVat = StatusVat.Czynny;
                 else if(odpowiedzMF.result.subject.statusVat == "Zwolniony") StatusVat = StatusVat.Zwolniony;
                 else if(odpowiedzMF.result.subject.statusVat == "Niezarejestrowany") StatusVat = StatusVat.Niezarejestrowany;
 

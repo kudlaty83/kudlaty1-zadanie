@@ -13,7 +13,7 @@ namespace kudlaty1.Module.BusinessObjects
         private string _residenceAddress;
         private string _krs;
         private string _regon;
-        private DateTime _registrationLegalDate;
+        private string _registrationLegalDate;
         private string _nip;
         private string _name;
         
@@ -21,7 +21,7 @@ namespace kudlaty1.Module.BusinessObjects
         public string residenceAddress { get => _residenceAddress; set { _residenceAddress = value ?? String.Empty; } }
         public string krs { get => _krs; set { _krs = value ?? "Brak wpisu w KRS"; } }
         public string regon { get => _regon; set { _regon = value ?? String.Empty; } }
-        public DateTime registrationLegalDate { get; set; }
+        public string registrationLegalDate { get; set; }
         public string nip { get; set; }
         public string name { get; set; }
 
